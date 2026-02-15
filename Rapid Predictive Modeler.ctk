@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?><Task schemaVersion="5.4">
+    <Registration>
+        <Name>Rapid Predictive Modeler</Name>
+        <Description>La tâche Rapid Predictive Modeler permet aux analystes et experts avec une expertise statistique limitée de générer rapidement leurs propres modèles prédictifs en se basant sur leurs besoins spécifiques et scénarios métier.</Description>
+        <GUID>5a8fd179-e954-4b9c-9b0a-cd73762cf574</GUID>
+        <Procedures/>
+        <Version>3.8</Version>
+        <Links>
+            <Link href="http://documentation.sas.com/?softwareId=STUDIOMID&amp;softwareVersion=3.8&amp;softwareContextId=tasks&amp;requestor=inapp">SAS Studio Task Reference Guide</Link>
+            <Link href=""/>
+            <Link href=""/>
+            <Link href="http://support.sas.com/training/studio">Tutoriels SAS</Link>
+        </Links>
+    </Registration>
+    <Metadata>
+        <DataSources>
+            <DataSource name="dataset" where="true">
+                <Roles>
+                    <Role exclude="excludeVariables,freqVariable,idVariables" fetchDistinct="true" maxVars="1" minVars="1" name="dependentVariable" type="A">Variable dépendante :</Role>
+                    <Role exclude="dependentVariable,freqVariable,idVariables" maxVars="0" minVars="0" name="excludeVariables" type="A">Variables à exclure du modèle :</Role>
+                    <Role exclude="dependentVariable,excludeVariables,idVariables" maxVars="1" minVars="0" name="freqVariable" type="N">Nombre d'occurrences :</Role>
+                    <Role exclude="dependentVariable,excludeVariables,freqVariable" maxVars="0" minVars="0" name="idVariables" type="A">Variables ID :</Role>
+                </Roles>
+            </DataSource>
+        </DataSources>
+        <Options>
+            <Option inputType="string" name="dataTab">DONNEES</Option>
+            <Option inputType="string" name="optionsTab">OPTIONS</Option>
+            <Option inputType="string" name="dataGroup">DONNEES</Option>
+            <Option inputType="string" name="rolesGroup">ROLES</Option>
+            <Option inputType="string" name="otherRolesGroup">ROLES SUPPLEMENTAIRES</Option>
+            <Option inputType="string" name="modelTab">MODELE</Option>
+            <Option inputType="string" name="modelGroup">MODELE</Option>
+            <Option defaultValue="basicMethodChoice" inputType="combobox" name="modelingMethod">Méthode de modélisation :</Option>
+            <Option inputType="string" name="basicMethodChoice">De base</Option>
+            <Option inputType="string" name="intermediateMethodChoice">Intermédiaire</Option>
+            <Option inputType="string" name="advancedMethodChoice">Avancée</Option>
+            <Option inputType="variablesummary" name="variableSummary" source="dataset"/>
+            <!-- Note: The priordecisions component is for internal use only -->
+            <Option indent="1" inputType="priordecisions" name="decisionsAndPriors" source="dependentVariable"/>
+            <Option inputType="string" name="reportsGroup">RAPPORTS</Option>
+            <Option defaultValue="defaultReportsChoice" inputType="combobox" name="reportsCombo">Sélectionner les rapports à afficher :</Option>
+            <Option inputType="string" name="defaultReportsChoice">Rapports standard</Option>
+            <Option inputType="string" name="customReportsChoice">Rapports standards et supplémentaires</Option>
+            <Option indent="1" inputType="string" name="additionalReportsLabel">Rapports supplémentaires</Option>
+            <Option indent="1" inputType="checkbox" name="modelSummary">Agrégation du modèle</Option>
+            <Option indent="1" inputType="checkbox" name="variableRanking">Classement de la variable</Option>
+            <Option indent="1" inputType="checkbox" name="crossTabulations">Tableaux croisés</Option>
+            <Option indent="1" inputType="checkbox" name="classificationMatrix">Matrice de classification</Option>
+            <Option indent="1" inputType="checkbox" name="fitStatistics">Tests d'ajustement</Option>
+            <Option indent="1" inputType="checkbox" name="liftPlot">Courbe d'élévation</Option>
+            <Option indent="1" inputType="checkbox" name="modelComparison">Comparaison de modèles</Option>
+            <Option indent="1" inputType="checkbox" name="standardReports">Rapports standard</Option>
+            <Option indent="1" inputType="string" name="nominalDependentVarsOnly">Rapports pour les variables dépendantes nominales</Option>
+            <Option inputType="string" name="outputTab">SORTIE</Option>
+            <Option inputType="string" name="outputGroup">TABLES DE SORTIE</Option>
+            <Option inputType="checkbox" name="scoreDS">Table d'entrée du scoring</Option>
+            <Option defaultValue="WORK.RPM_scores" indent="1" inputType="outputdata" name="scoreDSName" required="true" width="100%">Nom de la table de sortie :</Option>
+            <Option inputType="checkbox" name="createProject">Enregistrer les données du projet Enterprise Miner</Option>
+            <!-- Note: The sasserverpath component is for internal use only -->
+            <Option defaultName="RPM" indent="1" inputType="sasserverpath" name="projectFolderName" pathType="project" required="true"/>
+            <Option inputType="checkbox" name="createScoringCode">Exporter le code du scoring</Option>
+            <!-- Note: The sasserverpath component is for internal use only -->
+            <Option indent="1" inputType="sasserverpath" name="scoringCodeFileName" pathType="folder" required="true"/>
+            <!-- Strings used in SAS code -->
+            <Option inputType="string" name="countLabel">Nombres de niveaux</Option>
+            <Option inputType="string" name="dataProportionLabel">Proportions des données</Option>
+            <Option inputType="string" name="trainingProportionLabel">Proportions d'apprentissage</Option>
+            <Option inputType="string" name="decisionPriorsLabel">Valeurs a priori de décision</Option>
+            <Option inputType="string" name="commentClean">Nettoyer la bibliothèque WORK</Option>
+            <Option inputType="string" name="savemsg">Enregistrer la liste de tables dans la bibliothèque WORK</Option>
+        </Options>
+    </Metadata>
+    <UI>
+        <Container option="dataTab">
+            <Group open="true" option="dataGroup">
+                <DataItem data="dataset"/>
+                <OptionItem option="variableSummary"/>
+            </Group>
+            <Group open="true" option="rolesGroup">
+                <RoleItem role="dependentVariable"/>
+                <OptionItem option="decisionsAndPriors"/>
+            </Group>
+            <Group option="otherRolesGroup">
+                <RoleItem role="excludeVariables"/>
+                <RoleItem role="freqVariable"/>
+                <RoleItem role="idVariables"/>
+            </Group>
+        </Container>
+        <Container option="optionsTab">
+            <Group open="true" option="modelGroup">
+                <OptionChoice option="modelingMethod">
+                    <OptionItem option="basicMethodChoice"/>
+                    <OptionItem option="intermediateMethodChoice"/>
+                    <OptionItem option="advancedMethodChoice"/>
+                </OptionChoice>
+            </Group>
+            <Group open="true" option="reportsGroup">
+                <OptionChoice option="reportsCombo">
+                    <OptionItem option="defaultReportsChoice"/>
+                    <OptionItem option="customReportsChoice"/>
+                </OptionChoice>
+                <OptionItem option="additionalReportsLabel"/>
+                <OptionItem option="modelSummary"/>
+                <OptionItem option="variableRanking"/>
+                <OptionItem option="fitStatistics"/>
+                <OptionItem option="liftPlot"/>
+                <OptionItem option="modelComparison"/>
+                <OptionItem option="nominalDependentVarsOnly"/>
+                <OptionItem option="crossTabulations"/>
+                <OptionItem option="classificationMatrix"/>
+            </Group>
+        </Container>
+        <Container option="outputTab">
+            <Group open="true" option="outputGroup">
+                <OptionItem option="createProject"/>
+                <OptionItem option="projectFolderName"/>
+                <OptionItem option="createScoringCode"/>
+                <OptionItem option="scoringCodeFileName"/>
+                <OptionItem option="scoreDS"/>
+                <OptionItem option="scoreDSName"/>
+            </Group>
+        </Container>
+    </UI>
+    <Dependencies>
+        <Dependency condition="!($dataset == '')">
+            <Target action="show" conditionResult="true" option="variableSummary"/>
+            <Target action="hide" conditionResult="false" option="variableSummary"/>
+        </Dependency>
+        <Dependency condition="($dependentVariable.size() &gt; 0)">
+            <Target action="show" conditionResult="true" option="decisionsAndPriors"/>
+            <Target action="hide" conditionResult="false" option="decisionsAndPriors"/>
+        </Dependency>
+        <Dependency condition="($reportsCombo=='customReportsChoice')">
+            <Target action="show" conditionResult="true" option="additionalReportsLabel"/>
+            <Target action="hide" conditionResult="false" option="additionalReportsLabel"/>
+            <Target action="show" conditionResult="true" option="modelSummary"/>
+            <Target action="hide" conditionResult="false" option="modelSummary"/>
+            <Target action="show" conditionResult="true" option="variableRanking"/>
+            <Target action="hide" conditionResult="false" option="variableRanking"/>
+            <Target action="show" conditionResult="true" option="crossTabulations"/>
+            <Target action="hide" conditionResult="false" option="crossTabulations"/>
+            <Target action="show" conditionResult="true" option="classificationMatrix"/>
+            <Target action="hide" conditionResult="false" option="classificationMatrix"/>
+            <Target action="show" conditionResult="true" option="fitStatistics"/>
+            <Target action="hide" conditionResult="false" option="fitStatistics"/>
+            <Target action="show" conditionResult="true" option="liftPlot"/>
+            <Target action="hide" conditionResult="false" option="liftPlot"/>
+            <Target action="show" conditionResult="true" option="modelComparison"/>
+            <Target action="hide" conditionResult="false" option="modelComparison"/>
+            <Target action="show" conditionResult="true" option="nominalDependentVarsOnly"/>
+            <Target action="hide" conditionResult="false" option="nominalDependentVarsOnly"/>
+        </Dependency>
+        <Dependency condition="($reportsCombo=='customReportsChoice' &amp;&amp; $modelingMethod == 'basicMethodChoice')">
+            <Target action="disable" conditionResult="true" option="modelComparison"/>
+            <Target action="enable" conditionResult="false" option="modelComparison"/>
+        </Dependency>
+        <Dependency condition="($scoreDS=='1')">
+            <Target action="enable" conditionResult="true" option="scoreDSName"/>
+            <Target action="disable" conditionResult="false" option="scoreDSName"/>
+        </Dependency>
+        <Dependency condition="($createProject=='1')">
+            <Target action="show" conditionResult="true" option="projectFolderName"/>
+            <Target action="hide" conditionResult="false" option="projectFolderName"/>
+        </Dependency>
+        <Dependency condition="($createScoringCode=='1')">
+            <Target action="show" conditionResult="true" option="scoringCodeFileName"/>
+            <Target action="hide" conditionResult="false" option="scoringCodeFileName"/>
+        </Dependency>
+    </Dependencies>
+    <Requirements>
+        <Requirement condition="             !(             ($dependentVariable.size() &gt; 0) &amp;&amp;              ($dataset.getDistinctCount($dependentVariable[0]) &lt; 2)             )">
+            <Message nlsKey="minLevelsResponseRequirementKey">The dependent variable must have two or more non-missing levels. Select another dependent variable.</Message>
+        </Requirement>
+        <Requirement condition="             !(             $dependentVariable.size() &gt; 0 &amp;&amp;              $dependentVariable.get(0).toString().equalsIgnoreCase('type')             )">
+            <Message nlsKey="reservedDepVarRequirementKey">The variable name Type is reserved and cannot be used as the dependent variable. Select another dependent variable.</Message>
+        </Requirement>
+        <Requirement condition="             !(             ($dependentVariable.size() &gt; 0) &amp;&amp;              ($dependentVariable[0].get('type') == 'Char') &amp;&amp;              ($dataset.getDistinctCount($dependentVariable[0]) &gt; 10)             )">
+            <Message nlsKey="maxLevelsResponseRequirementKey">The character dependent variable must have ten or fewer non-missing levels. Select another dependent variable.</Message>
+        </Requirement>
+        <Requirement condition="!($dataset.getTable().contains(&quot;'&quot;))">
+            <Message nlsKey="extendedDataKey">This task does not support usage of SAS data sets with extended names.  Select another data set.</Message>
+        </Requirement>
+    </Requirements>
+    <CodeTemplate>
+        <![CDATA[
+ods noproctitle;
+
+%let em_vardelta = WORK.IDS_VARIABLEATTRIBUTE;
+%let em_decdata = WORK.IDS_DECDATA;
+#if ($createScoringCode == 1)
+%let em_rpmscorefolder = %nrbquote($scoringCodeFileName.path);
+#else
+%let em_rpmscorefolder =;
+#end
+/* $savemsg  */;
+proc sql noprint;
+   select memname into :_memberlist_ separated by ' ' from sashelp.vmember
+   where libname='WORK';
+quit;   
+
+#if ($dataset.getWhereClause() != '')
+data Work.rpm_subset_data; set $dataset;
+   where $dataset.getWhereClause();
+run;
+%let em_traindata = Work.rpm_subset_data;
+#else
+%let em_traindata = $dataset;
+#end
+
+data &em_vardelta;
+   length variable $64 attributename $32 attributevalue $64;
+#if ( $dependentVariable.size() > 0 )#foreach( $item in $dependentVariable )
+      #set($_var="$item")
+      #set($len=$_var.indexOf("'") )
+      #if($len == 0) 
+         #set($len1 = $_var.length())
+         #set($end1 = $len1 - 2)
+         #set($rawVarName = $_var.substring(1,$end1))
+   variable='$rawVarName';
+      #else
+   variable='$item';
+      #end      
+   attributename="ROLE";
+   attributevalue="TARGET";
+   output;
+   #end
+#end
+#if( $idVariables.size() > 0 )#foreach( $item in $idVariables ) 
+      #set($_var="$item")
+      #set($len=$_var.indexOf("'") )
+      #if($len == 0) 
+         #set($len1 = $_var.length())
+         #set($end1 = $len1 - 2)
+         #set($rawVarName = $_var.substring(1,$end1))
+   variable='$rawVarName';
+      #else
+   variable='$item';
+      #end      
+   attributename="ROLE";
+   attributevalue="ID";
+   output;
+   #end
+#end
+#if( $freqVariable.size() > 0 )#foreach( $item in $freqVariable ) 
+      #set($_var="$item")
+      #set($len=$_var.indexOf("'") )
+      #if($len == 0) 
+         #set($len1 = $_var.length())
+         #set($end1 = $len1 - 2)
+         #set($rawVarName = $_var.substring(1,$end1))
+   variable='$rawVarName';
+      #else
+   variable='$item';
+      #end      
+   attributename="ROLE";
+   attributevalue="FREQUENCY";
+   output;
+   #end
+#end
+#if( $excludeVariables.size() > 0 )#foreach( $item in $excludeVariables )
+      #set($_var="$item")
+      #set($len=$_var.indexOf("'") )
+      #if($len == 0) 
+         #set($len1 = $_var.length())
+         #set($end1 = $len1 - 2)
+         #set($rawVarName = $_var.substring(1,$end1))
+   variable='$rawVarName';
+      #else
+   variable='$item';
+      #end      
+   attributename="ROLE";
+   attributevalue="EXCLUDED";
+   output;
+   #end
+#end
+run;
+
+#if ($dependentVariable.size() > 0 && 
+   $decisionsAndPriors.available &&
+   ($decisionsAndPriors.priorType.equalsIgnoreCase('user') ||
+      ($decisionsAndPriors.decisionType.equalsIgnoreCase('max') || 
+         $decisionsAndPriors.decisionType.equalsIgnoreCase('min')
+         )
+      )
+   )
+data &em_decdata;
+   length
+      $CTMUtil.toSASName($dependentVariable.get(0)) $ 32    
+      count 8
+      dataprior 8
+      trainprior 8
+      decprior 8
+   ## for each level of dependent variable 
+   #foreach( $item in $decisionsAndPriors.priors)
+      decision$foreach.count 8  
+   #end
+      ;
+   label
+      count="$countLabel"           ## "Level Counts"
+      dataprior="$dataProportionLabel"      ## "Data Proportions"
+      trainprior="$trainingProportionLabel" ## "Training Proportions"
+      decprior="$decisionPriorsLabel"       ## "Decision Priors"
+   ## for each level of dependent variable 
+   #foreach( $item in $decisionsAndPriors.priors)
+             decision$foreach.count = "%nrbquote($item.level)"
+   #end
+      ;
+
+   ## foreach (# of levels of dependent variable) **;
+   #foreach( $item in $decisionsAndPriors.priors)
+      #set($levelCount=$foreach.count)  ## which level
+   $CTMUtil.toSASName($dependentVariable.get(0)) = "%nrbquote($item.level)";
+   count=$item.freq;
+   dataprior=$item.proportion;
+   trainprior=$item.proportion;
+   decprior=#if($decisionsAndPriors.priorType.equalsIgnoreCase('NONE'))0
+         #else$item.priors
+         #end;
+       #set($decisions=$item.decision)
+       #foreach( $decisionItem in $item.decision)
+          decision$foreach.count = #if($decisionsAndPriors.decisionType.equalsIgnoreCase('NONE'))0
+##          #elseif($decisionsAndPriors.decisionType.equalsIgnoreCase('INVERSE'))
+##             #if($foreach.count == $levelCount)1/decprior#else 0#end
+          #else$decisionItem#end;
+    #end
+   output;
+   #end
+run;
+#end
+
+ods exclude all;
+ods HTML5 (ID=WEB) exclude all; ## "HTML5 (ID=WEB)" fixes the empty space at the top of the result
+
+filename RPM56197 catalog 'SASHELP.EMRPM.EM_RPM.SOURCE';
+%inc RPM56197;
+filename RPM56197;
+
+%EM_RPM(
+   flow=#if($modelingMethod == 'basicMethodChoice')basic#elseif($modelingMethod == 'intermediateMethodChoice')intermediate#{else}advanced#end, 
+#if($createProject=='1')
+   projpath=%nrbquote($projectFolderName.path),
+   projname=%nrbquote($projectFolderName.name), 
+#else
+   projpath=%nrbquote(),
+   projname=%nrbquote(),
+#end
+   taskid=$decisionsAndPriors.task_id, 
+   data=&em_traindata, 
+   variabledelta=&em_vardelta, 
+   targetlevel=,    
+   decdata=&em_decdata,
+#if ($decisionsAndPriors.available) 
+### Decision and Priors control is defined
+   prior=#if($decisionsAndPriors.priorType.equalsIgnoreCase('NONE'))none#elseif($decisionsAndPriors.priorType.equalsIgnoreCase('EQUAL'))equal#{else}userdefined#end, 
+   decision=#if($decisionsAndPriors.decisionType.equalsIgnoreCase('NONE'))none#elseif($decisionsAndPriors.decisionType.equalsIgnoreCase('INVERSE'))inverse#elseif($decisionsAndPriors.decisionType.equalsIgnoreCase('MAX'))maximum#{else}minimum#end, 
+   event=%nrbquote($decisionsAndPriors.event)
+#else
+### Decision and Priors control is undefined
+   prior=none, 
+   decision=inverse, 
+   event=%nrbquote()
+#end
+#if($scoreDS == 1)
+, score=&em_traindata,
+   scoreout=$scoreDSName
+#end
+    );
+
+filename RPM56197 catalog 'SASHELP.EMRPM.EM_RPMREPORT.SOURCE';
+%inc RPM56197;
+filename RPM56197;
+
+ods exclude none; 
+ods listing close;  ## IMPORTANT: This statement fixes a PATH/GPATH is not writable error
+
+%EM_RPMREPORT(modelType=#if($modelingMethod == 'basicMethodChoice')BASIC
+#elseif($modelingMethod == 'intermediateMethodChoice')INTERMEDIATE
+#{else}ADVANCED#end,
+   modelSummarization=#if ($reportsCombo=='customReportsChoice' && $modelSummary == 1)Y#{else}N#end,
+   classification=#if     ($reportsCombo=='customReportsChoice' && $classificationMatrix == 1)Y#{else}N#end,
+   liftChart=#if          ($reportsCombo=='customReportsChoice' && $liftPlot == 1)Y#{else}N#end,
+   varRanking=#if         ($reportsCombo=='customReportsChoice' && $variableRanking == 1)Y#{else}N#end,
+   crossTabs=#if          ($reportsCombo=='customReportsChoice' && $crossTabulations == 1)Y#{else}N#end,
+   fitStats=#if           ($reportsCombo=='customReportsChoice' && $fitStatistics == 1)Y#{else}N#end,
+   compareMdl=#if         ($reportsCombo=='customReportsChoice' && $modelComparison == 1)Y#{else}N#end);
+
+/* $commentClean */
+
+proc datasets library= work noprint nowarn;
+   save &_memberlist_ #if($scoreDSName.getLibrary() == 'WORK') $scoreDSName.getTable() #end ;
+run;
+
+
+]]>
+    </CodeTemplate>
+    <TemplateValues version="3.8">
+        <![CDATA[
+{"decisionPriorsLabel":"Valeurs a priori de décision","modelComparison":"","excludeVariables":"","savemsg":"Enregistrer la liste de tables dans la bibliothèque WORK","modelSummary":"","liftPlot":"","scoringCodeFileName":{"path":"/home/u64451536"},"createProject":"","sasOS":"Linux LIN X64 5.14.0-284.30.1.el9_2.x86_64","scoreDS":"","crossTabulations":"","dataTab":"DONNEES","variableSummary":{"dummy":"dummy"},"reportsCombo":"defaultReportsChoice","nominalDependentVarsOnly":"Rapports pour les variables dépendantes nominales","rolesGroup":"ROLES","trainingProportionLabel":"Proportions d'apprentissage","decisionsAndPriors":{"task_id":"190da04b-4978-4d68-bc79-2a8e3447a914","available":false},"reportsGroup":"RAPPORTS","standardReports":"","dependentVariable":"json:[{\"value\":\"price\",\"type\":\"Numeric\",\"length\":8,\"format\":\"BEST12.\",\"informat\":\"BEST32.\",\"className\":\"RoleObject\"}]","idVariables":"","countLabel":"Nombres de niveaux","otherRolesGroup":"ROLES SUPPLEMENTAIRES","intermediateMethodChoice":"Intermédiaire","dataProportionLabel":"Proportions des données","basicMethodChoice":"De base","customReportsChoice":"Rapports standards et supplémentaires","modelingMethod":"basicMethodChoice","createScoringCode":"1","classificationMatrix":"","scoreDSName":"WORK.RPM_scores","advancedMethodChoice":"Avancée","projectFolderName":{"path":"/home/u64451536","name":"RPM","fullPath":"/home/u64451536/RPM"},"dataGroup":"DONNEES","defaultReportsChoice":"Rapports standard","modelGroup":"MODELE","sasVersion":"9.48","fitStatistics":"","modelTab":"MODELE","outputGroup":"TABLES DE SORTIE","commentClean":"Nettoyer la bibliothèque WORK","additionalReportsLabel":"Rapports supplémentaires","variableRanking":"","freqVariable":"","outputTab":"SORTIE","optionsTab":"OPTIONS","dataset":{"librarytable":"WORK.WINE"}}
+]]>
+    </TemplateValues>
+</Task>
