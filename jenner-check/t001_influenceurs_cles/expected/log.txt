@@ -1,0 +1,69 @@
+NOTE: Jenner v1.5.30 (build v1.5.30+unknown.20260714T020019Z.x86_64-unknown-linux-gnu)
+
+NOTE: Option OBS changed to 100.
+NOTE: DATA wine
+
+NOTE: Processing inline DATALINES (26 lines)
+
+NOTE: Read 26 rows from DATALINES.
+NOTE: Wrote wine (26 rows, 8 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: DATA wine_clean
+
+
+NOTE: Read 26 rows from wine.
+NOTE: Wrote wine_clean (26 rows, 12 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: DATA pinot_usa
+
+
+NOTE: Read 12 rows from wine_clean.
+NOTE: Wrote pinot_usa (12 rows, 12 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: PROC SQL 
+
+NOTE: PROC SQL statement used.
+NOTE: PROC SQL 
+
+NOTE: Table taster_stats created.
+NOTE: PROC SQL statement used.
+NOTE: PROC SORT data=taster_stats
+
+NOTE: Read 3 rows from taster_stats.
+NOTE: Wrote taster_key (3 rows, 4 columns).
+NOTE: PROC SORT statement used.
+NOTE: PROC PRINT data=taster_key
+
+NOTE: PROC PRINT completed: 3 observations printed, 4 variables
+NOTE: PROC SQL 
+
+NOTE: Table province_stats created.
+NOTE: PROC SQL statement used.
+NOTE: PROC SORT data=province_stats
+
+NOTE: Read 2 rows from province_stats.
+NOTE: Wrote province_by_volume (2 rows, 4 columns).
+NOTE: PROC SORT statement used.
+NOTE: PROC PRINT data=province_by_volume
+
+NOTE: PROC PRINT completed: 2 observations printed, 4 variables
+NOTE: PROC CORR data=pinot_usa
+
+NOTE: ODS plot written: corr_heatmap.spec.json
+NOTE: PROC CORR ODS Graphics generated.
+NOTE: PROC REG data=pinot_usa
+
+NOTE: PROC REG: processed 1 job(s) in batch
+NOTE: ODS plot written: reg_residuals_vs_predicted.spec.json
+NOTE: ODS plot written: reg_residual_histogram_panel.spec.json
+NOTE: ODS plot written: reg_residuals_vs_obs_order.spec.json
+NOTE: ODS plot written: reg_qq_plot.spec.json
+NOTE: ODS plot written: reg_cooksd.spec.json
+NOTE: ODS plot written: reg_fitplot.spec.json
+NOTE: PROC REG ODS Graphics generated.

@@ -1,0 +1,58 @@
+nb_pinot_usa
+------------
+          12
+                              Influenceurs clés (taster_name) pour le Pinot Noir aux USA
+
+  Obs     Dégustateur  Nb vins   Note moyenne     Prix moyen
+    1  Matt_Kettmann         2             91           46.5
+    2  Virginie_Boone        3             89  46.3333333333
+    3  Paul_Gregutt          7  86.1428571429  36.4285714286
+
+                              Influenceurs clés (taster_name) pour le Pinot Noir aux USA
+
+                                  Provinces clés pour le Pinot Noir aux USA (volume)
+
+  Obs    province  n_wines     avg_points      avg_price
+    1  Oregon            7  86.1428571429  36.4285714286
+    2  California        5           89.8           46.4
+
+                                  Provinces clés pour le Pinot Noir aux USA (volume)
+
+                    The CORR Procedure
+                        2 Variables:    price   points
+                    Simple Statistics
+Variable         N      Mean   Std Dev       Sum   Minimum   Maximum
+--------  --------  --------  --------  --------  --------  --------
+price           12  40.58333  10.28201   487.00000  18.00000  53.00000
+points          12  87.66667   2.42462  1052.00000  85.00000  91.00000
+   Pearson Correlation Coefficients, N = 12
+          Prob > |r| under H0: Rho=0
+               price    points
+--------  --------  --------
+price      1.00000   0.37317
+              .       0.2322
+points     0.37317   1.00000
+            0.2322      .
+                                  Provinces clés pour le Pinot Noir aux USA (volume)
+
+                                                   The REG Procedure                                                    
+                                                     Model: MODEL1                                                      
+                                               Dependent Variable: price                                                
+
+Source                 DF  Sum of Squares  Mean Square   F Value    Pr > F
+---------------  --------  --------------  -----------  --------  --------
+Model                   1       161.93986    161.93986      1.62    0.2322
+Error                  10      1000.97680    100.09768                    
+Corrected Total        11      1162.91667                                 
+
+Root MSE          10.00488    R-Square            0.1393
+Dependent Mean      40.58333    Adj R-Sq            0.0532
+Coeff Var         24.65269
+
+                       Parameter Estimates                        
+
+Variable         DF   Estimate  Standard Error   t Value  Pr > |t|
+---------  --------  ---------  --------------  --------  --------
+Intercept         1  -98.14691       109.10847     -0.90    0.3895
+points            1    1.58247         1.24415      1.27    0.2322
+

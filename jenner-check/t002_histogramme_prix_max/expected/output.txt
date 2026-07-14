@@ -1,0 +1,22 @@
+                                        Prix maximum par pays (tri décroissant)
+
+  Obs       Pays  Prix maximum
+    1  France               91
+    2  US                   53
+    3  Argentina            31
+    4  Spain                29
+    5  Italy                27
+
+                                        Prix maximum par pays (tri décroissant)
+
+                                  Somme des prix par taster_name (ordre décroissant)
+
+  Obs         Dégustateur  Somme des prix
+    1  Roger_Voss                     272
+    2  Paul_Gregutt                   255
+    3  Virginie_Boone                 139
+    4  Michael_Schachner               99
+    5  Matt_Kettmann                   93
+    6  Kerin_OKeefe                    46
+    7  Alexander_Peartree              18
+

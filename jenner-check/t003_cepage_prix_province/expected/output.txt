@@ -1,0 +1,25 @@
+                                  Nombre de cépages (variety) par province — France
+
+                                                   The FREQ Procedure
+
+                                        Cumulative    Cumulative
+province      Frequency    Percent     Frequency      Percent
+-------------------------------------------------------------------
+Alsace                1     14.29            1        14.29
+Beaujolais            3     42.86            4        57.14
+Bordeaux              1     14.29            5        71.43
+Champagne             2     28.57            7       100.00
+                             Prix minimum et maximum par province — France (format long)
+
+  Obs    Province  min_price  max_price  Mesure  Prix
+    1                     15         91  Min       15
+    2                     15         91  Max       91
+    3  Alsace             25         25  Min       25
+    4  Alsace             25         25  Max       25
+    5  Beaujolais         15         19  Min       15
+    6  Beaujolais         15         19  Max       19
+    7  Bordeaux           17         17  Min       17
+    8  Bordeaux           17         17  Max       17
+    9  Champagne          87         91  Min       87
+   10  Champagne          87         91  Max       91
+

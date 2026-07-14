@@ -1,0 +1,52 @@
+NOTE: Jenner v1.5.30 (build v1.5.30+unknown.20260714T020019Z.x86_64-unknown-linux-gnu)
+
+NOTE: Option OBS changed to 100.
+NOTE: DATA wine
+
+NOTE: Processing inline DATALINES (26 lines)
+
+NOTE: Read 26 rows from DATALINES.
+NOTE: Wrote wine (26 rows, 8 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: PROC SQL 
+
+NOTE: Table country_counts created.
+NOTE: PROC SQL statement used.
+NOTE: DATA top10_countries
+
+
+NOTE: Read 5 rows from country_counts.
+NOTE: Wrote top10_countries (5 rows, 2 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: PROC SQL 
+
+NOTE: Table wine_top10 created.
+NOTE: PROC SQL statement used.
+NOTE: PROC SQL 
+
+NOTE: Table max_price_country created.
+NOTE: PROC SQL statement used.
+NOTE: PROC SORT data=max_price_country
+
+NOTE: Read 5 rows from max_price_country.
+NOTE: Wrote max_price_country (5 rows, 2 columns).
+NOTE: PROC SORT statement used.
+NOTE: PROC PRINT data=max_price_country
+
+NOTE: PROC PRINT completed: 5 observations printed, 2 variables
+NOTE: PROC SQL 
+
+NOTE: Table sum_price_taster created.
+NOTE: PROC SQL statement used.
+NOTE: PROC SORT data=sum_price_taster
+
+NOTE: Read 7 rows from sum_price_taster.
+NOTE: Wrote sum_price_taster (7 rows, 2 columns).
+NOTE: PROC SORT statement used.
+NOTE: PROC PRINT data=sum_price_taster
+
+NOTE: PROC PRINT completed: 7 observations printed, 2 variables

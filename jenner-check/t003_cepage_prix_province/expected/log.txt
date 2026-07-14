@@ -1,0 +1,46 @@
+NOTE: Jenner v1.5.30 (build v1.5.30+unknown.20260714T020019Z.x86_64-unknown-linux-gnu)
+
+NOTE: Option OBS changed to 100.
+NOTE: DATA wine
+
+NOTE: Processing inline DATALINES (12 lines)
+
+NOTE: Read 12 rows from DATALINES.
+NOTE: Wrote wine (12 rows, 8 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: DATA wine_clean
+
+
+NOTE: Read 12 rows from wine.
+NOTE: Wrote wine_clean (12 rows, 12 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: DATA wine_france
+
+
+NOTE: Read 12 rows from work.wine_clean.
+NOTE: Wrote wine_france (7 rows, 12 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: PROC FREQ
+NOTE: Output dataset work.count_province_fr has 4 observations and 3 variables.
+NOTE: ODS plot written: freq_province.spec.json
+NOTE: PROC FREQ statement used.
+NOTE: PROC MEANS
+NOTE: Output dataset stats_province_fr has 5 observations and 3 variables.
+NOTE: PROC MEANS statement used.
+NOTE: DATA stats_long
+
+
+NOTE: Read 5 rows from stats_province_fr.
+NOTE: Wrote stats_long (10 rows, 5 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: PROC PRINT data=stats_long
+
+NOTE: PROC PRINT completed: 10 observations printed, 5 variables
