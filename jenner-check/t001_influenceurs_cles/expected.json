@@ -1,0 +1,19 @@
+{
+  "_captured_at": "2026-07-14T06:05:48.433562Z",
+  "_captured_run_id": "r_d280ff6d53f944a6b6b0a1fed1f27a68",
+  "status": "ok",
+  "exit_code": 0,
+  "log_contains": [
+    "NOTE: Wrote pinot_usa (12 rows, 12 columns).",
+    "NOTE: Table taster_stats created.",
+    "NOTE: PROC PRINT completed: 3 observations printed, 4 variables"
+  ],
+  "log_does_not_contain": [
+    "ERROR:",
+    "[JENNER-ERROR"
+  ],
+  "diagnostics": {
+    "parse_warnings": [],
+    "runtime_warnings": []
+  }
+}

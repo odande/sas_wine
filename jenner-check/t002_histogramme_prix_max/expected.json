@@ -1,0 +1,19 @@
+{
+  "_captured_at": "2026-07-14T06:05:48.997687Z",
+  "_captured_run_id": "r_090eeb3cb9824a8cb99142bf3a28034e",
+  "status": "ok",
+  "exit_code": 0,
+  "log_contains": [
+    "NOTE: Table country_counts created.",
+    "NOTE: Table max_price_country created.",
+    "NOTE: Table sum_price_taster created."
+  ],
+  "log_does_not_contain": [
+    "ERROR:",
+    "[JENNER-ERROR"
+  ],
+  "diagnostics": {
+    "parse_warnings": [],
+    "runtime_warnings": []
+  }
+}

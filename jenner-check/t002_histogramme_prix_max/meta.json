@@ -1,0 +1,7 @@
+{
+  "bundle": "t002_histogramme_prix_max",
+  "source_file": "histogramme prix max.sas",
+  "source_blob_sha": "efcb11cb372781f8bf2aa0d7e47eae39ab1a4587",
+  "source_commit": "3394fa1bab46ff3382ffe8c3c123d960a921394a",
+  "notes": "Top-countries + max price per country + price sum per taster: PROC SQL group-by/inner join/max/sum + PROC SORT + PROC PRINT. wine dataset supplied as a 26-row inline sample of wine.csv."
+}

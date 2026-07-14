@@ -1,0 +1,7 @@
+{
+  "bundle": "t003_cepage_prix_province",
+  "source_file": "prog_cepage_prix_province.sas",
+  "source_blob_sha": "f3df2b8ad02c2940403bc4941befc0ca63486ee6",
+  "source_commit": "3394fa1bab46ff3382ffe8c3c123d960a921394a",
+  "notes": "France cepage/price analysis: wine_clean prep + PROC FREQ out= + PROC MEANS class/output + long-format restructure DATA step. wine dataset supplied as a 12-row France-focused inline sample of wine.csv."
+}

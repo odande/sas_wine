@@ -1,0 +1,19 @@
+{
+  "_captured_at": "2026-07-14T06:05:52.823676Z",
+  "_captured_run_id": "r_5850e9d12544441f8a8d10c63602eab5",
+  "status": "ok",
+  "exit_code": 0,
+  "log_contains": [
+    "NOTE: Output dataset work.count_province_fr has 4 observations and 3 variables.",
+    "NOTE: Wrote wine_france (7 rows, 12 columns).",
+    "NOTE: Wrote stats_long (10 rows, 5 columns)."
+  ],
+  "log_does_not_contain": [
+    "ERROR:",
+    "[JENNER-ERROR"
+  ],
+  "diagnostics": {
+    "parse_warnings": [],
+    "runtime_warnings": []
+  }
+}

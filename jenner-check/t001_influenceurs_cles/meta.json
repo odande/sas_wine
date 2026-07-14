@@ -1,0 +1,7 @@
+{
+  "bundle": "t001_influenceurs_cles",
+  "source_file": "prog influenceurs cles.sas",
+  "source_blob_sha": "0d908871dcc8a51d08f8e49f299e01ca8cb6bc2c",
+  "source_commit": "3394fa1bab46ff3382ffe8c3c123d960a921394a",
+  "notes": "Pinot Noir US influencer analysis: DATA cleaning + PROC SQL aggregations (taster/province stats) + PROC SORT + PROC CORR + PROC REG. wine dataset supplied as a 26-row inline sample of wine.csv."
+}
